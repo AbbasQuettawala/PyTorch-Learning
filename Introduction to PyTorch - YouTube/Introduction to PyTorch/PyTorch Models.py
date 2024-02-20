@@ -19,9 +19,13 @@ import torch.nn.functional as F     # for the activation function
 
 #How do we express this simple neural network in code?
 
+# CLASS DEFINITION: New class called "LeNet", which is a subclass of nn.Module. In PyTorch, nn.Module is a base class for all neural network modules. Your custom neural network should always inherit from this class.
 class LeNet(nn.Module):
 
+# CONSTRUCTOR METHOD: This is the constructor of the LeNet class. The constructor is a special method that is called when a new instance of the class is created.
     def __init__(self):
+
+        
         super(LeNet, self).__init__()
         # 1 input image channel (black & white), 6 output channels, 5x5 square convolution
         # kernel
@@ -49,3 +53,17 @@ class LeNet(nn.Module):
         for s in size:
             num_features *= s
         return num_features
+    
+
+
+    net = LeNet()
+print(net)                         # what does the object tell us about itself?
+
+input = torch.rand(1, 1, 32, 32)   # stand-in for a 32x32 black & white image
+print('\nImage batch shape:')
+print(input.shape)
+
+output = net(input)                # we don't call forward() directly
+print('\nRaw output:')
+print(output)
+print(output.shape)
